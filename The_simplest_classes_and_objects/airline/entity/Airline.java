@@ -55,7 +55,7 @@ public class Airline {
         this.planeType = planeType;
     }
 
-    Date getDepartureTime() {
+    public Date getDepartureTime() {
         return departureTime;
     }
 
@@ -63,7 +63,7 @@ public class Airline {
         this.departureTime = departureTime;
     }
 
-    String[] getDayOfWeek() {
+    public String[] getDayOfWeek() {
         return dayOfWeek;
     }
 
