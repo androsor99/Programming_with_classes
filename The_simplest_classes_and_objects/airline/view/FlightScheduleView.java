@@ -2,7 +2,6 @@ package com.androsor.prog_class.airline.view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.androsor.prog_class.airline.entity.Airline;
 import com.androsor.prog_class.airline.entity.FlightScheduleCommand;
 

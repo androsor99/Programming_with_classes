@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import com.androsor.prog_class.airline.entity.FlightSchedule;
+import com.androsor.prog_class.airline.logic.FlightSchedule;
 import com.androsor.prog_class.airline.entity.FlightScheduleCommand;
 
 import static com.androsor.prog_class.airline.entity.FlightScheduleCommand.*;

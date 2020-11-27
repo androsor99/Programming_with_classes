@@ -1,14 +1,11 @@
 package com.androsor.prog_class.airline.view;
 
 import com.androsor.prog_class.airline.entity.Airline;
-import com.androsor.prog_class.airline.entity.DayOfWeek;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class ReadingFlightSchedule {
@@ -33,15 +30,8 @@ public class ReadingFlightSchedule {
 //            for (int i = 0; i < arrayList.size(); i++) {
 //                dayOfWeeksss[i] = DayOfWeek.valueOf(arrayList.get(i));
 //            }
-
-
             flightSchedule.add(new Airline(lines[0], lines[1], lines[2], Airline.ft.parse(lines[3]), linesDays));
-
         }
         return flightSchedule;
     }
-
-
-
-
 }
