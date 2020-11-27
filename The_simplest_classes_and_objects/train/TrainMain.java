@@ -1,13 +1,10 @@
 package com.androsor.prog_class.train;
 
-
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
-
 import static com.androsor.prog_class.train.ReadSchedule.*;
-import static com.androsor.prog_class.train.SortingScheduleUtil.*;
-import static com.androsor.prog_class.train.TypeSortingSchedule.*;
-
+import static com.androsor.prog_class.train.ScheduleCommand.*;
 
 /**
  * Create a Train class containing fields: destination name, train number, departure time. Create data into an array of
@@ -18,19 +15,25 @@ import static com.androsor.prog_class.train.TypeSortingSchedule.*;
 
 public class TrainMain {
 
+    private static final String TRAIN_INFORMATION = "Поезд №-%s\t\t%s\t\t%s\n";
 
     public static void main(String[] args) throws IOException {
 
         Train[] trainList = readSchedule();
         enterOptionsSchedule();
 
-        int command;
+        int userCommand;
 
         do {
-            command = enterFromConsole("Введите команду:\n-> ");
-            showOptionsSchedule(command, trainList);
-        } while (command != EXIT_PROGRAM);
+            userCommand = enterFromConsole("Введите команду:\n-> ");
+            ScheduleCommand command = getScheduleCommandByCode(userCommand);
 
+            if (command != null) {
+                processCommand(command, trainList);
+            } else {
+                System.out.print("Неверная команда. ");
+            }
+        } while (userCommand != EXIT_PROGRAM.getCode());
     }
 
     public static void showTrainSchedule(Train[] trains, String nameOfSchedule) {
@@ -44,7 +47,7 @@ public class TrainMain {
 
     public static int enterFromConsole(String massage) {
 
-        System.out.println(massage);
+        System.out.print(massage);
         Scanner sc = new Scanner(System.in);
         while (!sc.hasNextInt()) {
             System.out.print("Введенное значение не является числом. Повторите ввод:\n-> ");
@@ -74,53 +77,42 @@ public class TrainMain {
         }
     }
 
-    public static void showOptionsSchedule(int command, Train[] trainList) {
+    public static void processCommand(ScheduleCommand command, Train[] trains) {
 
-        String nameOfSchedule;
-
-        switch (command) {
-
-            case SHOW_SCHEDULE -> {
-                nameOfSchedule = "Исходное расписание:\n---------------------------\n";
-                showTrainSchedule(trainList, nameOfSchedule);
-            }
-            case SORT_SCHEDULE_NUMBER -> {
-                sortByNumber(trainList);
-                nameOfSchedule = "Осортированное рассписание по номерам поездов:\n----------------------------------\n";
-                showTrainSchedule(trainList, nameOfSchedule);
-            }
-            case SORT_SCHEDULE_DESTINATION -> {
-                sortByDestination(trainList);
-                nameOfSchedule = "Осортированное рассписание пункту назначения:\n----------------------------------\n";
-                showTrainSchedule(trainList, nameOfSchedule);
-            }
-            case SORT_SCHEDULE_DEPARTURE_TIME -> {
-                sortByDepartureTime(trainList);
-                nameOfSchedule = "Осортированное рассписание по времени отправления:\n----------------------------------\n";
-                showTrainSchedule(trainList, nameOfSchedule);
-            }
-            case SORT_SCHEDULE_DEPARTURE_AND_TIME -> {
-                sortByTrainDestinationAndDepartureTime(trainList);
-                nameOfSchedule = "Осортированное рассписание месту прибытия и времени отправления:" +
-                        "\n----------------------------------\n";
-                showTrainSchedule(trainList, nameOfSchedule);
-            }
-            case SHOW_TRAIN_INFORMATION -> showTrainInformation(trainList);
-
-            case EXIT_PROGRAM -> {
-            }
-            default -> System.out.print("Неверная команда. ");
+        if (command == SHOW_TRAIN_INFORMATION) {
+            showTrainInformation(trains);
+        }
+        if (command == SHOW_SCHEDULE) {
+            showTrainSchedule(trains, getNameOfSchedule(command));
+        }
+        if (sortingCommands.contains(command)) {
+            Arrays.sort(trains, new SortType(command));
+            showTrainSchedule(trains, getNameOfSchedule(command));
         }
     }
 
+    public static String getNameOfSchedule(ScheduleCommand command) {
+
+        switch (command) {
+
+            case SHOW_SCHEDULE -> {return "Исходное расписание:\n---------------------------\n";}
+            case SORT_SCHEDULE_NUMBER -> {return "Осортированное рассписание по номерам поездов:\n----------------------------------\n";}
+            case SORT_SCHEDULE_DESTINATION -> {return "Осортированное рассписание пункту назначения:\n----------------------------------\n";}
+            case SORT_SCHEDULE_DEPARTURE_TIME -> {return "Осортированное рассписание по времени отправления:\n----------------------------------\n";}
+            case SORT_SCHEDULE_DEPARTURE_AND_TIME -> {return "Осортированное рассписание месту прибытия и времени отправления:\n----------------------------------\n";}
+        }
+        return null;
+    }
+
     public static void enterOptionsSchedule (){
-        System.out.printf("Введите -%d- чтобы вывести расписание поездов \n", SHOW_SCHEDULE);
-        System.out.printf("Введите -%d- чтобы отсортировать  расписание по номеру поезда \n", SORT_SCHEDULE_NUMBER);
-        System.out.printf("Введите -%d- чтобы отсортировать  расписание по месту назначения \n", SORT_SCHEDULE_DESTINATION);
-        System.out.printf("Введите -%d- чтобы отсортировать  расписание по времени прибыти \n", SORT_SCHEDULE_DEPARTURE_TIME);
-        System.out.printf("Введите -%d- чтобы отсортировать  расписание по месту назначения и времени прибытия \n", SORT_SCHEDULE_DEPARTURE_AND_TIME);
-        System.out.printf("Введите -%d- чтобы вывести информацию о поезде \n", SHOW_TRAIN_INFORMATION);
-        System.out.printf("Введите -%d- чтобы завершить программу \n", EXIT_PROGRAM);
+
+        System.out.printf("Введите -%d- чтобы вывести расписание поездов \n", SHOW_SCHEDULE.getCode());
+        System.out.printf("Введите -%d- чтобы отсортировать  расписание по номеру поезда \n", SORT_SCHEDULE_NUMBER.getCode());
+        System.out.printf("Введите -%d- чтобы отсортировать  расписание по месту назначения \n", SORT_SCHEDULE_DESTINATION.getCode());
+        System.out.printf("Введите -%d- чтобы отсортировать  расписание по времени прибыти \n", SORT_SCHEDULE_DEPARTURE_TIME.getCode());
+        System.out.printf("Введите -%d- чтобы отсортировать  расписание по месту назначения и времени прибытия \n", SORT_SCHEDULE_DEPARTURE_AND_TIME.getCode());
+        System.out.printf("Введите -%d- чтобы вывести информацию о поезде \n", SHOW_TRAIN_INFORMATION.getCode());
+        System.out.printf("Введите -%d- чтобы завершить программу \n", EXIT_PROGRAM.getCode());
     }
 }
 
