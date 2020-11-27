@@ -33,24 +33,27 @@ public class SimpleTime implements Cloneable {
     }
 
     public void setHour(int hour) {
-        if (this.hour < 0 || this.hour > 23) {
+        if (hour < 0 || hour > 23) {
             this.hour = 0;
+        } else {
+            this.hour = hour;
         }
-        this.hour = hour;
     }
 
     public void setMinute(int minute) {
-        if (this.minute < 0 || this.minute > 59) {
+        if (minute < 0 || minute > 59) {
             this.minute = 0;
+        } else {
+            this.minute = minute;
         }
-        this.minute = minute;
     }
 
     public void setSecond(int second) {
-        if (this.second < 0 || this.second > 59) {
+        if (second < 0 || second > 59) {
             this.second = 0;
+        } else {
+            this.second = second;
         }
-        this.second = second;
     }
 
     public void replaceHour(int hour) {
