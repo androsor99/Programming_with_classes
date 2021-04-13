@@ -87,17 +87,17 @@ public abstract class CompositeAdministrativeUnit<T extends AdministrativeUnit> 
         this.area += unit.getArea();
     }
 
-    public void addAdministrativeUnits(List<T>units) {
+    public void addAdministrativeUnits(List<T> units) {
         this.administrativeUnits.addAll(units);
         calculateAreaAndPopulation(units);
     }
 
-    public void removeAdministrativeUnit(T administrativeUnit) {
-            this.administrativeUnits.remove(administrativeUnit);
+    public void removeAdministrativeUnit(T unit) {
+            this.administrativeUnits.remove(unit);
     }
 
-    public void removeAdministrativeUnits(List<T> administrativeUnits) {
-            this.administrativeUnits.removeAll(administrativeUnits);
+    public void removeAdministrativeUnits(List<T> units) {
+            this.administrativeUnits.removeAll(units);
     }
 
     public int getNumberOfAdministrativeUnits() {
