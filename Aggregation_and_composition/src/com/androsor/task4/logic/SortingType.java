@@ -10,7 +10,7 @@ import static java.util.Comparator.comparing;
 public enum SortingType {
 
     SORT_BY_NUMBER(bankAccounts -> bankAccounts.sort(comparing(BankAccount::getNumber))),
-    SORT_BY_BALANCE(bankAccounts -> bankAccounts.sort(comparing(BankAccount::getBalance).reversed())),
+    SORT_BY_BALANCE(bankAccounts -> bankAccounts.sort(comparing(BankAccount::getBalance))),
     SORT_BY_DATE(bankAccounts -> bankAccounts.sort(comparing(BankAccount::getDateCreation))),
     SORT_BY_STATUS(bankAccounts -> bankAccounts.sort(comparing(BankAccount::isActive).reversed()));
 
