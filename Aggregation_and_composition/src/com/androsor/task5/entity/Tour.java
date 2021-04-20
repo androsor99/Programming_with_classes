@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Tour {
 
-    private TourType tourType;
-    private String country;
+    private TourType tourType = TourType.DEFAULT;
+    private String country = "Шчучыншчына";
     private int numberOfDays;
-    private TransportType transport;
-    private TypeOfFood typeOfFood;
-    private BigDecimal price;
+    private TransportType transport = TransportType.DEFAULT;
+    private TypeOfFood typeOfFood = TypeOfFood.NOT_INCLUDED;
+    private BigDecimal price = new BigDecimal("0");
 
     public Tour() {
     }

@@ -2,6 +2,7 @@ package com.androsor.task5.entity;
 
 public enum TourType {
 
+    DEFAULT("15 суток"),
     RECREATION("Отдых"),
     EXCURSION("Экскурсия"),
     TREATMENT("Лечение"),

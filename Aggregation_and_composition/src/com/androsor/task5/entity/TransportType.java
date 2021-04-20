@@ -2,6 +2,7 @@ package com.androsor.task5.entity;
 
 public enum TransportType {
 
+    DEFAULT("На оленях"),
     PLANE("Самолёт"),
     BUS("Автобс"),
     TRAIN("Поезд"),

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class TravelAgency {
 
-    private String name;
+    private String name = "Сиди дома";
     private List<Tour> tours;
 
     public TravelAgency() {
