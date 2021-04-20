@@ -24,7 +24,8 @@ public enum CalculatingType {
     public Function<List<BankAccount>, BigDecimal> getCalculatingBalance() {
         return calculatingBalance;
     }
-    public static Stream<BigDecimal> getBalance(List<BankAccount> accounts) {
+
+    private static Stream<BigDecimal> getBalance(List<BankAccount> accounts) {
         return accounts.stream()
         .map(BankAccount::getBalance);
     }
